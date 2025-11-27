@@ -1,0 +1,32 @@
+{
+  "name": "tdd-stats-calculator",
+  "version": "1.0.0",
+  "description": "An app that processes a sequence of integer numbers without using any built-in Math library functions. Given a list of integers, it computes basic statistical information and returns the results in a single structured object.",
+  "main": "stats-calculator.ts",
+  "type": "module",
+  "scripts": {
+    "start": "node dist/stats-calculator.js",
+    "dev": "ts-node src/stats-calculator.ts",
+    "test": "jest",
+    "test:watch": "jest --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/isOmarDev/tdd-stats-calculator.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/isOmarDev/tdd-stats-calculator/issues"
+  },
+  "homepage": "https://github.com/isOmarDev/tdd-stats-calculator#readme",
+  "devDependencies": {
+    "@types/jest": "^30.0.0",
+    "@types/node": "^24.10.1",
+    "jest": "^30.2.0",
+    "ts-jest": "^29.4.5",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
+  }
+}
