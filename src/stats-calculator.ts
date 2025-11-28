@@ -8,6 +8,10 @@ export class StatsCalculator {
       currentValue < prevValue ? currentValue : prevValue
     );
 
-    return { min: minValue };
+    const maxValue = sequence.reduce((prevValue, currentValue) =>
+      currentValue > prevValue ? currentValue : prevValue
+    );
+
+    return { min: minValue, max: maxValue };
   }
 }
