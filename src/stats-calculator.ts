@@ -12,6 +12,12 @@ export class StatsCalculator {
       currentValue > prevValue ? currentValue : prevValue
     );
 
-    return { min: minValue, max: maxValue };
+    const totalElements = sequence.reduce(
+      (prevValue: number, currentValue) =>
+        currentValue !== undefined ? ++prevValue : prevValue,
+      0
+    );
+
+    return { min: minValue, max: maxValue, count: totalElements };
   }
 }

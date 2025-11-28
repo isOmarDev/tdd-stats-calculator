@@ -36,4 +36,41 @@ describe('Stats calculator', () => {
       );
     });
   });
+
+  describe('total number of element in the sequence', () => {
+    it('returns an object with "6" as the total count of a sequence', () => {
+      const result = StatsCalculator.run([2, 4, 21, -8, 53, 40]);
+      expect(result.count).toBe(6);
+    });
+
+    it('returns an object with "5" as the total count of a sequence that contains empty values', () => {
+      const result = StatsCalculator.run([2, 4, , , , -8, 53, 40]);
+      expect(result.count).toBe(5);
+    });
+
+    it('returns an object with "5" as the total count of a sequence that contains "undefined" values', () => {
+      const result = StatsCalculator.run([
+        2,
+        4,
+        undefined,
+        undefined,
+        undefined,
+        -8,
+        53,
+        40,
+      ]);
+      expect(result.count).toBe(5);
+    });
+
+    it('returns an object with "4" as the total count of a sequence that contains "undefined" and empty values', () => {
+      const result = StatsCalculator.run([2, 4, undefined, , 53, 40]);
+      expect(result.count).toBe(4);
+    });
+
+    it('throws "Cannot calculate stats for empty array" error when sequence is empty', () => {
+      expect(() => StatsCalculator.run([])).toThrow(
+        'Cannot calculate stats for empty array'
+      );
+    });
+  });
 });
