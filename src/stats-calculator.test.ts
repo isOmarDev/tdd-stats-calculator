@@ -119,4 +119,30 @@ describe('Stats calculator', () => {
       );
     });
   });
+
+  describe('The sequence is empty', () => {
+    it('throws "Cannot calculate stats for empty array" error when sequence contains empty values only', () => {
+      expect(() => StatsCalculator.run([, , ,])).toThrow(
+        'Cannot calculate stats for empty array'
+      );
+    });
+
+    it('throws "Cannot calculate stats for empty array" error when sequence contains "undefined" values only', () => {
+      expect(() =>
+        StatsCalculator.run([undefined, undefined, undefined])
+      ).toThrow('Cannot calculate stats for empty array');
+    });
+
+    it('throws "Cannot calculate stats for empty array" error when sequence contains "undefined" and empty values only', () => {
+      expect(() =>
+        StatsCalculator.run([undefined, , , undefined])
+      ).toThrow('Cannot calculate stats for empty array');
+    });
+
+    it('throws "Cannot calculate stats for empty array" error when sequence is empty', () => {
+      expect(() => StatsCalculator.run([])).toThrow(
+        'Cannot calculate stats for empty array'
+      );
+    });
+  });
 });

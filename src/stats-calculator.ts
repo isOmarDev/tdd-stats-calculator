@@ -1,6 +1,13 @@
 export class StatsCalculator {
+  private static isEmpty(sequence: (number | undefined)[]) {
+    return (
+      sequence.every((value) => value === undefined) ||
+      sequence.length === 0
+    );
+  }
+
   static run(sequence: (number | undefined)[]) {
-    if (sequence.length === 0) {
+    if (this.isEmpty(sequence)) {
       throw new Error('Cannot calculate stats for empty array');
     }
 
