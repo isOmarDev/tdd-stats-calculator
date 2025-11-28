@@ -18,6 +18,20 @@ export class StatsCalculator {
       0
     );
 
-    return { min: minValue, max: maxValue, count: totalElements };
+    const avgValue =
+      sequence.reduce(
+        (prevValue: number, currentValue) =>
+          currentValue === undefined
+            ? prevValue
+            : currentValue + prevValue,
+        0
+      ) / totalElements;
+
+    return {
+      min: minValue,
+      max: maxValue,
+      count: totalElements,
+      avg: avgValue,
+    };
   }
 }

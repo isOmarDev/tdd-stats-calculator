@@ -73,4 +73,50 @@ describe('Stats calculator', () => {
       );
     });
   });
+
+  describe('The average of all values in the sequence', () => {
+    it('returns an object with "18.666666666668" as the average of all values in the sequence', () => {
+      const result = StatsCalculator.run([2, 4, 21, -8, 53, 40]);
+      expect(result.avg).toBe((2 + 4 + 21 + -8 + 53 + 40) / 6);
+    });
+
+    it('returns an object with "18.666666666668" as the average of all values in the sequence that contains empty values', () => {
+      const result = StatsCalculator.run([2, 4, 21, , -8, 53, 40]);
+      expect(result.avg).toBe((2 + 4 + 21 + -8 + 53 + 40) / 6);
+    });
+
+    it('returns an object with "18.666666666668" as the average of all values in the sequence that contains "undefined" values', () => {
+      const result = StatsCalculator.run([
+        2,
+        4,
+        21,
+        undefined,
+        undefined,
+        -8,
+        53,
+        40,
+      ]);
+      expect(result.avg).toBe((2 + 4 + 21 + -8 + 53 + 40) / 6);
+    });
+
+    it('returns an object with "18.666666666668" as the average of all values in the sequence that contains "undefined" and empty values', () => {
+      const result = StatsCalculator.run([
+        2,
+        4,
+        21,
+        ,
+        undefined,
+        -8,
+        53,
+        40,
+      ]);
+      expect(result.avg).toBe((2 + 4 + 21 + -8 + 53 + 40) / 6);
+    });
+
+    it('throws "Cannot calculate stats for empty array" error when sequence is empty', () => {
+      expect(() => StatsCalculator.run([])).toThrow(
+        'Cannot calculate stats for empty array'
+      );
+    });
+  });
 });
