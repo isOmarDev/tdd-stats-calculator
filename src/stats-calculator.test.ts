@@ -7,7 +7,12 @@ describe('Stats calculator', () => {
       expect(result.min).toBe(-8);
     });
 
-    it('throws a "Cannot calculate stats for empty array" error if sequence is empty', () => {
+    it('returns an object with "-8" as the smallest value in the sequence with empty values', () => {
+      const result = StatsCalculator.run([, , -8, ,]);
+      expect(result.min).toBe(-8);
+    });
+
+    it('throws "Cannot calculate stats for empty array" error when sequence is empty', () => {
       expect(() => StatsCalculator.run([])).toThrow(
         'Cannot calculate stats for empty array'
       );
