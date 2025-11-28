@@ -6,5 +6,11 @@ describe('Stats calculator', () => {
       const result = StatsCalculator.run([2, 4, 21, -8, 53, 40]);
       expect(result.min).toBe(-8);
     });
+
+    it('throws a "Cannot calculate stats for empty array" error if sequence is empty', () => {
+      expect(() => StatsCalculator.run([])).toThrow(
+        'Cannot calculate stats for empty array'
+      );
+    });
   });
 });
