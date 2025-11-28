@@ -1,5 +1,9 @@
 export class StatsCalculator {
   static run(sequence: (number | undefined)[]) {
-    return { min: sequence[3] };
+    const minValue = sequence.reduce((prevValue, currentValue) =>
+      currentValue < prevValue ? currentValue : prevValue
+    );
+
+    return { min: minValue };
   }
 }
