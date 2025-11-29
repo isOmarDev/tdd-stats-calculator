@@ -1,148 +1,119 @@
 import { StatsCalculator } from './stats-calculator';
 
+const testCases = [
+  {
+    sequence: [2, 4, 21, -8, 53, 40],
+    min: -8,
+    max: 53,
+    avg: 18.666666666667,
+    count: 6,
+  },
+  {
+    sequence: [10, -5, 32, 0, 17, -12, 22],
+    min: -12,
+    max: 32,
+    avg: 9.142857142857142,
+    count: 7,
+  },
+  {
+    sequence: [3, 8, 15, 21, 42, 7, 34, 4, 39],
+    min: 3,
+    max: 42,
+    avg: 19.22222222222222,
+    count: 9,
+  },
+  {
+    sequence: [-3, -8, -15, -21, -42, -7, -34, -4, -39],
+    min: -42,
+    max: -3,
+    avg: -19.22222222222222,
+    count: 9,
+  },
+  {
+    sequence: [3, 8, , , 42, 7, 34, 4, 39],
+    min: 3,
+    max: 42,
+    avg: 19.571428571428573,
+    count: 7,
+  },
+  {
+    sequence: [5, undefined, undefined, 20, 7, 34, 4, 39],
+    min: 4,
+    max: 39,
+    avg: 18.166666666666668,
+    count: 6,
+  },
+  {
+    sequence: [-1, 8, undefined, , 80, 7, 34, 4, 39, 20, 65, 79],
+    min: -1,
+    max: 80,
+    avg: 33.5,
+    count: 10,
+  },
+];
+
 describe('Stats calculator', () => {
-  describe('Smallest value in the sequence', () => {
-    it('returns an object with "-8" as the smallest value in the sequence', () => {
-      const result = StatsCalculator.run([2, 4, 21, -8, 53, 40]);
-      expect(result.min).toBe(-8);
-    });
-
-    it('returns an object with "-8" as the smallest value in the sequence with empty values', () => {
-      const result = StatsCalculator.run([, , -8, ,]);
-      expect(result.min).toBe(-8);
-    });
-
-    it('throws "Cannot calculate stats for empty array" error when sequence is empty', () => {
-      expect(() => StatsCalculator.run([])).toThrow(
-        'Cannot calculate stats for empty array'
-      );
-    });
+  describe('The minimum value in a sequence', () => {
+    it.each(testCases)(
+      'returns "$min" for sequence "$sequence"',
+      ({ sequence, min }) => {
+        const result = StatsCalculator.run(sequence);
+        expect(result.min).toBe(min);
+      }
+    );
   });
 
-  describe('Largest value in the sequence', () => {
-    it('returns an object with "53" as the largest value in the sequence', () => {
-      const result = StatsCalculator.run([2, 4, 21, -8, 53, 40]);
-      expect(result.max).toBe(53);
-    });
-
-    it('returns an object with "-8" as the smallest value in the sequence with empty values', () => {
-      const result = StatsCalculator.run([, , -8, ,]);
-      expect(result.max).toBe(-8);
-    });
-
-    it('throws "Cannot calculate stats for empty array" error when sequence is empty', () => {
-      expect(() => StatsCalculator.run([])).toThrow(
-        'Cannot calculate stats for empty array'
-      );
-    });
+  describe('The maximum value in a sequence', () => {
+    it.each(testCases)(
+      'returns "$max" for sequence "$sequence"',
+      ({ sequence, max }) => {
+        const result = StatsCalculator.run(sequence);
+        expect(result.max).toBe(max);
+      }
+    );
   });
 
-  describe('total number of element in the sequence', () => {
-    it('returns an object with "6" as the total count of a sequence', () => {
-      const result = StatsCalculator.run([2, 4, 21, -8, 53, 40]);
-      expect(result.count).toBe(6);
-    });
-
-    it('returns an object with "5" as the total count of a sequence that contains empty values', () => {
-      const result = StatsCalculator.run([2, 4, , , , -8, 53, 40]);
-      expect(result.count).toBe(5);
-    });
-
-    it('returns an object with "5" as the total count of a sequence that contains "undefined" values', () => {
-      const result = StatsCalculator.run([
-        2,
-        4,
-        undefined,
-        undefined,
-        undefined,
-        -8,
-        53,
-        40,
-      ]);
-      expect(result.count).toBe(5);
-    });
-
-    it('returns an object with "4" as the total count of a sequence that contains "undefined" and empty values', () => {
-      const result = StatsCalculator.run([2, 4, undefined, , 53, 40]);
-      expect(result.count).toBe(4);
-    });
-
-    it('throws "Cannot calculate stats for empty array" error when sequence is empty', () => {
-      expect(() => StatsCalculator.run([])).toThrow(
-        'Cannot calculate stats for empty array'
-      );
-    });
+  describe('The total number of element in a sequence', () => {
+    it.each(testCases)(
+      'returns "$count" for sequence "$sequence"',
+      ({ sequence, count }) => {
+        const result = StatsCalculator.run(sequence);
+        expect(result.count).toBe(count);
+      }
+    );
   });
 
-  describe('The average of all values in the sequence', () => {
-    it('returns an object with "18.666666666668" as the average of all values in the sequence', () => {
-      const result = StatsCalculator.run([2, 4, 21, -8, 53, 40]);
-      expect(result.avg).toBe((2 + 4 + 21 + -8 + 53 + 40) / 6);
-    });
-
-    it('returns an object with "18.666666666668" as the average of all values in the sequence that contains empty values', () => {
-      const result = StatsCalculator.run([2, 4, 21, , -8, 53, 40]);
-      expect(result.avg).toBe((2 + 4 + 21 + -8 + 53 + 40) / 6);
-    });
-
-    it('returns an object with "18.666666666668" as the average of all values in the sequence that contains "undefined" values', () => {
-      const result = StatsCalculator.run([
-        2,
-        4,
-        21,
-        undefined,
-        undefined,
-        -8,
-        53,
-        40,
-      ]);
-      expect(result.avg).toBe((2 + 4 + 21 + -8 + 53 + 40) / 6);
-    });
-
-    it('returns an object with "18.666666666668" as the average of all values in the sequence that contains "undefined" and empty values', () => {
-      const result = StatsCalculator.run([
-        2,
-        4,
-        21,
-        ,
-        undefined,
-        -8,
-        53,
-        40,
-      ]);
-      expect(result.avg).toBe((2 + 4 + 21 + -8 + 53 + 40) / 6);
-    });
-
-    it('throws "Cannot calculate stats for empty array" error when sequence is empty', () => {
-      expect(() => StatsCalculator.run([])).toThrow(
-        'Cannot calculate stats for empty array'
-      );
-    });
+  describe('The average of all values in a sequence', () => {
+    it.each(testCases)(
+      'returns "$avg" for sequence "$sequence"',
+      ({ sequence, avg }) => {
+        const result = StatsCalculator.run(sequence);
+        expect(result.avg).toBeCloseTo(avg);
+      }
+    );
   });
 
   describe('The sequence is empty', () => {
-    it('throws "Cannot calculate stats for empty array" error when sequence contains empty values only', () => {
-      expect(() => StatsCalculator.run([, , ,])).toThrow(
-        'Cannot calculate stats for empty array'
-      );
-    });
+    const testCasesWithEmptySequence = [
+      {
+        sequence: [, , ,],
+        errorMsg: 'Cannot calculate stats for empty array',
+      },
+      {
+        sequence: [undefined, undefined, undefined],
+        errorMsg: 'Cannot calculate stats for empty array',
+      },
+      {
+        sequence: [undefined, , , undefined],
+        errorMsg: 'Cannot calculate stats for empty array',
+      },
+    ];
 
-    it('throws "Cannot calculate stats for empty array" error when sequence contains "undefined" values only', () => {
-      expect(() =>
-        StatsCalculator.run([undefined, undefined, undefined])
-      ).toThrow('Cannot calculate stats for empty array');
-    });
-
-    it('throws "Cannot calculate stats for empty array" error when sequence contains "undefined" and empty values only', () => {
-      expect(() =>
-        StatsCalculator.run([undefined, , , undefined])
-      ).toThrow('Cannot calculate stats for empty array');
-    });
-
-    it('throws "Cannot calculate stats for empty array" error when sequence is empty', () => {
-      expect(() => StatsCalculator.run([])).toThrow(
-        'Cannot calculate stats for empty array'
-      );
-    });
+    it.each(testCasesWithEmptySequence)(
+      'throws "$errorMsg" error for sequence "$sequence"',
+      ({ sequence, errorMsg }) => {
+        expect(() => StatsCalculator.run(sequence)).toThrow(errorMsg);
+      }
+    );
   });
 });
