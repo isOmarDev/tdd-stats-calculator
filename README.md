@@ -4,7 +4,7 @@ A simple Statistics Calculator built using Test-Driven Development (TDD).
 
 ## Project Overview (TDD)
 
-The app is a simple Statistics Calculator built using Test-Driven Development (TDD) by wishful thinking.  
+A simple Statistics Calculator built using Test-Driven Development (TDD) by wishful thinking.  
 The goal of the project is to practice writing tests first, then implementing the calculation logic to make the tests pass.
 
 ## What is Statistics Calculation?
@@ -67,7 +67,7 @@ This project follows the classic TDD cycle:
 ### Installation
 
 ```bash
-git clone https://github.com/Mohamed-kamel91/tdd-stats-calculator.git
+git clone https://github.com/isOmarDev/tdd-stats-calculator.git
 cd tdd-stats-calculator
 npm install
 ```
@@ -76,12 +76,12 @@ npm install
 
 ```bash
 npm test
-npm run test:dev
+npm run test:watch
 ```
 
 ## API
 
-### `calculateStats(numbers: number[]): StatsResult`
+### `StatsCalculator.run(numbers: number[]): StatsResult`
 
 **Parameters:**
 
@@ -94,14 +94,14 @@ npm run test:dev
   min: number,
   max: number,
   count: number,
-  average: number
+  avg: number
 }
 ```
 
 - `min`: The smallest value in the sequence
 - `max`: The largest value in the sequence
 - `count`: Total number of elements
-- `average`: The arithmetic mean of all values
+- `avg`: The arithmetic mean of all values
 
 ## Usage
 
@@ -110,21 +110,19 @@ npm run test:dev
 ```ts
 import { StatsCalculator } from './src/statsCalculator';
 
-console.log(StatsCalculator.calculateStats([2, 4, 21, -8, 53, 40]));
+console.log(StatsCalculator.run([2, 4, 21, -8, 53, 40]));
 
 /*
 {
   min: -8,
   max: 53,
   count: 6,
-  average: 18.666666666667
+  avg: 18.666666666667
 }
 */
 ```
 
 ## Learning Goals
 
-- Practice real-world TDD workflow by wishful thinking
-- Improve test-driven thinking
-- Learn how to implement algorithms without built-in helpers
-- Build predictable and maintainable code
+- Practice real-world TDD workflow
+- Improve clean-class design using wishful thinking
